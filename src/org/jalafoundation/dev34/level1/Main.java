@@ -75,7 +75,7 @@ public class Main {
         System.out.println("We delete an element from the Map : treeMap.remove(18)" + treeMap.remove(18));
         System.out.println("We see what happens if we want to obtain the key that does not exist : treeMap.get(18) = " + treeMap.get(18));
 
-        System.out.println("\n\n********* TreeMap con Objetos y como Clave un String *********");
+        System.out.println("\n\n********* TreeMap with object and a string as a key *********");
 
         Map<String, Player> player = new TreeMap<String, Player>();
         player.put("Casillas", new Player(1, "Casillas", "Portero"));
@@ -90,12 +90,32 @@ public class Main {
         player.put("Iniesta", new Player(6, "Iniesta", "Interior Derecho"));
         player.put("Villa", new Player(7, "Villa", "Delantero"));
 
-        for (Map.Entry<String, Player> players : player.entrySet()) {
-            String clave = players.getKey();
-            Player valor = players.getValue();
+        for (Map.Entry<String, Player> playerEntry : player.entrySet()) {
+            String clave = playerEntry.getKey();
+            Player valor = playerEntry.getValue();
             System.out.println(clave + "  ->  " + valor.toString());
         }
 
-        System.out.println("-------------------------------------------");
+        System.out.println("\n\n********* TreeMap with objects as a key *********");
+
+        Map<Player, List<String>> playersGames = new HashMap<>() {{
+            put(new Player(1, "Casillas", "Goalkeeper"), new ArrayList<>(Arrays.asList("Barcelona vs Real Madrid", "Barcelona vs Manchester", "Barcelona vs PSG")));
+            put(new Player(14, "Xabi", "Center"), new ArrayList<>(Arrays.asList("Barcelona vs Juventus", "Barcelona vs Chelsea")));
+            put(new Player(7, "Villa", "Forward"), new ArrayList<>(Arrays.asList("Barcelona vs PSG", "Barcelona vs Real Madrid")));
+            put(new Player(6, "Iniesta", "Left Side"), new ArrayList<>(Arrays.asList("Barcelona vs Juventus", "Barcelona vs RealMadrid")));
+            put(new Player(13, "Pique", "Center"), new ArrayList<>(Arrays.asList("Barcelona vs Manchester", "Barcelona vs Chelsea")));
+            put(new Player(1, "Casillas", "Goalkeeper"), new ArrayList<>(Arrays.asList("Barcelona vs Real Madrid", "Barcelona vs Manchester")));
+            //put(new Player(14, "Xabi", "Center"), new ArrayList<>(Arrays.asList("Barcelona vs Juventus", "Barcelona vs Chelsea")));
+        }};
+
+        for (Map.Entry<Player, List<String>> entry : playersGames.entrySet()) {
+            System.out.print(entry.getKey().getName());
+            System.out.print(" -> ");
+            System.out.println(entry.getValue());
+        }
+
+        System.out.println();
+        System.out.print("Number of football games played of Xavi: ");
+        System.out.println(playersGames.get(new Player(14, "Xabi", "Center")).size());
     }
 }
