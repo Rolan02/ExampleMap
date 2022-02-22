@@ -1,5 +1,7 @@
 package org.jalafoundation.dev34.level1;
 
+import java.util.Objects;
+
 public class Player {
     private int dorsal;
     private String name;
@@ -39,18 +41,25 @@ public class Player {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
     public String toString() {
         return this.dorsal+"  --  "+this.name+"  --  "+this.demarcation;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Player player = (Player) o;
+        return dorsal == player.dorsal && Objects.equals(name, player.name)
+            && Objects.equals(demarcation, player.demarcation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dorsal, name, demarcation);
+    }
 }
